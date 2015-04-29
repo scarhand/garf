@@ -11,7 +11,6 @@ class Chromosome
   def calculateFitness
     sum = 0.0
     @fitnessConditions.each do |f|
-      #sum += fitnessCondition.Weight * fitnessCondition.CalculateFitness<Chromosome<T>, T>(this);
       sum += f.weight * f.calculateFitness(self)
     end
     return 1 / (1 + sum)

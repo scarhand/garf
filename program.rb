@@ -12,8 +12,8 @@ end
 class Program
   def initialize
     pop = Population.new
-    pop.strategies = [OnePointCrossover.new, TwoPointCrossover.new, UniformCrossover.new]
-    gs = (0..9).map do |i|
+    pop.strategies = [OnePointCrossover.new, TwoPointCrossover.new, UniformCrossover.new, CutSpliceCrossover.new]
+    gs = (0..20).map do |i|
       Gene.new(i)
     end
     c1 = Chromosome.new
@@ -26,7 +26,7 @@ class Program
     c4.genes = c1.genes.dup.shuffle
     pop.currentPopulation = [c1, c2, c3, c4]
     puts pop.to_s
-    10.times do
+    3.times do
       puts "#{'-'*40} EVOLVING... #{'-'*40}"
       pop = pop.evolve
       puts pop.to_s
