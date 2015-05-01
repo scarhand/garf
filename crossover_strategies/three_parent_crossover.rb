@@ -1,16 +1,16 @@
 class ThreeParentCrossover
   
-  def crossover(firstChromosome, secondChromosome, thirdChromosome)
+  def crossover(first_chromosome, second_chromosome, third_chromosome)
     
-    raise "Gene counts do not match" if firstChromosome.genes.count != secondChromosome.genes.count || 
-                                        secondChromosome.genes.count != thirdChromosome.genes.count
-    result = firstChromosome.clone
+    raise "Gene counts do not match" if first_chromosome.genes.count != second_chromosome.genes.count || 
+                                        second_chromosome.genes.count != third_chromosome.genes.count
+    result = first_chromosome.clone
     result.genes = []
-    (0...firstChromosome.genes.count).each do |i|
-      if firstChromosome.genes[i] == secondChromosome.genes[i]
-        result.genes.push firstChromosome.genes[i]
+    (0...first_chromosome.genes.count).each do |i|
+      if first_chromosome.genes[i] == second_chromosome.genes[i]
+        result.genes.push first_chromosome.genes[i]
       else
-        result.genes.push thirdChromosome.genes[i]
+        result.genes.push third_chromosome.genes[i]
       end
     end
     return result

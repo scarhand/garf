@@ -3,14 +3,14 @@ class OnePointCrossover
   def initialize 
   end
   
-  def crossover(firstChromosome, secondChromosome)
+  def crossover(first_chromosome, second_chromosome)
     provider = RandomProvider.instance
-    firstChild = firstChromosome.clone
-    secondChild = secondChromosome.clone
+    firstChild = first_chromosome.clone
+    secondChild = second_chromosome.clone
     
-    crossoverPoint = provider.nextInt(0, [firstChromosome.genes.count, secondChromosome.genes.count].min)
-    firstChild.genes = firstChromosome.genes[0...crossoverPoint] + secondChromosome.genes[crossoverPoint..-1]
-    secondChild.genes = firstChromosome.genes[crossoverPoint..-1] + secondChromosome.genes[0...crossoverPoint]
+    crossoverPoint = provider.nextInt(0, [first_chromosome.genes.count, second_chromosome.genes.count].min)
+    firstChild.genes = first_chromosome.genes[0...crossoverPoint] + second_chromosome.genes[crossoverPoint..-1]
+    secondChild.genes = first_chromosome.genes[crossoverPoint..-1] + second_chromosome.genes[0...crossoverPoint]
     
     return firstChild, secondChild
   end

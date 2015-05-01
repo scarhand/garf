@@ -1,6 +1,6 @@
 class ValidationConstraint
   
-  def isValid?(chromosome)
+  def is_valid?(chromosome)
   end
   
 end

@@ -5,25 +5,25 @@ class UniformCrossover
   end
   
   
-  def crossover(firstChromosome, secondChromosome)
+  def crossover(first_chromosome, second_chromosome)
     
-    raise "Gene counts do not match" if firstChromosome.genes.count != secondChromosome.genes.count
+    raise "Gene counts do not match" if first_chromosome.genes.count != second_chromosome.genes.count
     
     provider = RandomProvider.instance
-    firstChild = firstChromosome.clone
-    secondChild = secondChromosome.clone
+    firstChild = first_chromosome.clone
+    secondChild = second_chromosome.clone
     
     firstChild.genes = []
     secondChild.genes = []
     
-    (0...firstChromosome.genes.count).each do |i|
+    (0...first_chromosome.genes.count).each do |i|
       p = provider.nextDouble
       if(p < @probability)
-        firstChild.genes.push firstChromosome.genes[i]
-        secondChild.genes.push secondChromosome.genes[i]
+        firstChild.genes.push first_chromosome.genes[i]
+        secondChild.genes.push second_chromosome.genes[i]
       else
-        firstChild.genes.push secondChromosome.genes[i]
-        secondChild.genes.push firstChromosome.genes[i]
+        firstChild.genes.push second_chromosome.genes[i]
+        secondChild.genes.push first_chromosome.genes[i]
       end
     end
     

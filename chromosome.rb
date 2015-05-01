@@ -1,32 +1,32 @@
 class Chromosome
   
-  attr_accessor :fitnessConditions, :constraints, :genes
+  attr_accessor :fitness_conditions, :constraints, :genes
   
   def initialize
-    @fitnessConditions = []
+    @fitness_conditions = []
     @constraints = []
     @genes = []
   end
   
-  def calculateFitness
+  def calculate_fitness
     sum = 0.0
-    @fitnessConditions.each do |f|
-      sum += f.weight * f.calculateFitness(self)
+    @fitness_conditions.each do |f|
+      sum += f.weight * f.calculate_fitness(self)
     end
     return 1 / (1 + sum)
   end
   
-  def isValid?
+  def is_valid?
     result = true
     @constraints.each do |c|
-      result &= c.isValid?(self)
+      result &= c.is_valid?(self)
     end
     return result
   end
   
   def clone
     result = Chromosome.new
-    result.fitnessConditions = fitnessConditions.dup
+    result.fitness_conditions = fitness_conditions.dup
     result.constraints = constraints.dup
     result.genes = genes.map {|g| g.clone}
     return result

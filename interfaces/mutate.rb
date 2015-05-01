@@ -1,7 +1,7 @@
 class Mutate
   
-  def self.mutate(originalGene)
-    originalGene.value ^= 1
+  def self.mutate(original_gene)
+    original_gene.value ^= 1
   end
   
 end

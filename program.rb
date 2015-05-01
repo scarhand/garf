@@ -1,18 +1,19 @@
 require_relative 'Population'
 require_relative 'Chromosome'
-Dir.glob("./crossover_strategies/*.rb").each do |file|
+Dir["./crossover_strategies/*.rb"].each do |file|
   require file
 end
-Dir.glob("./interfaces/*.rb").each do |file|
+Dir["./interfaces/*.rb"].each do |file|
   require file
 end
-
+puts __dir__
 
 
 class Program
   def initialize
     pop = Population.new
-    pop.strategies = [OnePointCrossover.new, TwoPointCrossover.new, UniformCrossover.new, CutSpliceCrossover.new]
+    #CutSpliceCrossover.new
+    pop.strategies = [OnePointCrossover.new, TwoPointCrossover.new, UniformCrossover.new]
     gs = (0..20).map do |i|
       Gene.new(i)
     end
@@ -24,7 +25,7 @@ class Program
     c3.genes = c1.genes.dup.shuffle
     c4 = Chromosome.new
     c4.genes = c1.genes.dup.shuffle
-    pop.currentPopulation = [c1, c2, c3, c4]
+    pop.current_population = [c1, c2, c3, c4]
     puts pop.to_s
     3.times do
       puts "#{'-'*40} EVOLVING... #{'-'*40}"

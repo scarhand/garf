@@ -1,15 +1,15 @@
 class CutSpliceCrossover
   
-  def crossover(firstChromosome, secondChromosome)
+  def crossover(first_chromosome, second_chromosome)
     provider = RandomProvider.instance
-    firstChild = firstChromosome.clone
-    secondChild = secondChromosome.clone
+    firstChild = first_chromosome.clone
+    secondChild = second_chromosome.clone
     
-    crossoverPoint1 = provider.nextInt(0, firstChromosome.genes.count)
-    crossoverPoint2 = provider.nextInt(0, secondChromosome.genes.count)
+    crossoverPoint1 = provider.nextInt(0, first_chromosome.genes.count)
+    crossoverPoint2 = provider.nextInt(0, second_chromosome.genes.count)
     
-    firstChild.genes = firstChromosome.genes[0..crossoverPoint1] + secondChromosome.genes[crossoverPoint2..-1]
-    secondChild.genes = secondChromosome.genes[crossoverPoint2..-1] + firstChromosome.genes[0..crossoverPoint1]
+    firstChild.genes = first_chromosome.genes[0..crossoverPoint1] + second_chromosome.genes[crossoverPoint2..-1]
+    secondChild.genes = second_chromosome.genes[crossoverPoint2..-1] + first_chromosome.genes[0..crossoverPoint1]
     
     return firstChild, secondChild
   end

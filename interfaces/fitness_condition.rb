@@ -6,7 +6,7 @@ class FitnessCondition
     @weight = (!weight.nil? && weight) || 0
   end
   
-  def calculateFitness(chromosome)
+  def calculate_fitness(chromosome)
   end
   
 end

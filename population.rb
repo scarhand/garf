@@ -1,53 +1,53 @@
 class Population
   
-  attr_accessor :currentPopulation, :offspring, :strategies, :currentGeneration
-  attr_reader :crossoverChance, :mutationChance
+  attr_accessor :current_population, :offspring, :strategies, :current_generation
+  attr_reader :crossover_chance, :mutation_chance
   
   def initialize
-    @currentGeneration = 0
-    @currentPopulation = [] #Chromosomes
+    @current_generation = 0
+    @current_population = [] #Chromosomes
     @offspring = [] #Chromosomes
     @strategies = []
     # Chance that the crossover operation occurs = Pc(1 - CrossoverChance).
     # Default is 0.7 (70% chance).
-    @crossoverChance = 0.7 
+    @crossover_chance = 0.7 
     # Chance that a mutation occurs in a gene = Pm(1 - MutationChance).
     # Default is 0.001 (0.1% chance)
-    @mutationChance = 0.001
+    @mutation_chance = 0.001
   end
   
   def populationSize
-    currentPopulation.count
+    current_population.count
   end
     
   def evolve
     provider = RandomProvider.instance
     population = Population.new
-    population.currentGeneration = currentGeneration+1
+    population.current_generation = current_generation+1
     population.strategies = strategies
-    currentPopulation.inject do |c1,c2|
+    current_population.inject do |c1,c2|
       p = provider.nextDouble
-      if p < @crossoverChance
+      if p < @crossover_chance
         strategy = strategies[provider.nextInt(0,strategies.count-1)]
         crossed = strategy.crossover c1, c2
         mutate *crossed
-        population.currentPopulation.push *crossed # splat the array to single values
+        population.current_population.push *crossed # splat the array to single values
       else
         c1 = c1.clone
         c2 = c2.clone
         mutate c1, c2
-        population.currentPopulation.push c1,c2
+        population.current_population.push c1,c2
       end
       c2
     end
     #remove duplicates
-    population.currentPopulation.uniq!
-    offspring = population.currentPopulation
+    population.current_population.uniq!
+    offspring = population.current_population
     return population
   end
   
   def to_s
-    "POPULATION (SIZE #{populationSize}) (GENERATION #{currentGeneration}) \n#{currentPopulation.join("\n")}"
+    "POPULATION (SIZE #{populationSize}) (GENERATION #{current_generation}) \n#{current_population.join("\n")}"
   end
   
   private
@@ -55,7 +55,7 @@ class Population
     provider = RandomProvider.instance
     chromosomes.each do |c|
       c.genes.each do |g|
-        Mutate.mutate(g) if provider.nextDouble <= @mutationChance
+        Mutate.mutate(g) if provider.nextDouble <= @mutation_chance
       end
     end
   end
