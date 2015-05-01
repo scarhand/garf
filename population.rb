@@ -26,9 +26,9 @@ class Population
     population.current_generation = current_generation+1
     population.strategies = strategies
     current_population.inject do |c1,c2|
-      p = provider.nextDouble
+      p = provider.next_double
       if p < @crossover_chance
-        strategy = strategies[provider.nextInt(0,strategies.count-1)]
+        strategy = strategies[provider.next_int(0,strategies.count-1)]
         crossed = strategy.crossover c1, c2
         mutate *crossed
         population.current_population.push *crossed # splat the array to single values
@@ -55,7 +55,7 @@ class Population
     provider = RandomProvider.instance
     chromosomes.each do |c|
       c.genes.each do |g|
-        Mutate.mutate(g) if provider.nextDouble <= @mutation_chance
+        Mutate.mutate(g) if provider.next_double <= @mutation_chance
       end
     end
   end

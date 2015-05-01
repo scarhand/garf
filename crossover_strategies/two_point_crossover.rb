@@ -6,8 +6,8 @@ class TwoPointCrossover
     secondChild = second_chromosome.clone
     minGeneCount = [first_chromosome.genes.count, second_chromosome.genes.count].min
     
-    crossoverPoint1 = provider.nextInt(minGeneCount)
-    crossoverPoint2 = provider.nextInt(crossoverPoint1, minGeneCount)
+    crossoverPoint1 = provider.next_int(minGeneCount)
+    crossoverPoint2 = provider.next_int(crossoverPoint1, minGeneCount)
     diff = crossoverPoint2 - crossoverPoint1
     
     firstChild.genes =  first_chromosome.genes[0...crossoverPoint1] +

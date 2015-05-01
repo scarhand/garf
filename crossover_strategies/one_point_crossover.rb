@@ -8,7 +8,7 @@ class OnePointCrossover
     firstChild = first_chromosome.clone
     secondChild = second_chromosome.clone
     
-    crossoverPoint = provider.nextInt(0, [first_chromosome.genes.count, second_chromosome.genes.count].min)
+    crossoverPoint = provider.next_int(0, [first_chromosome.genes.count, second_chromosome.genes.count].min)
     firstChild.genes = first_chromosome.genes[0...crossoverPoint] + second_chromosome.genes[crossoverPoint..-1]
     secondChild.genes = first_chromosome.genes[crossoverPoint..-1] + second_chromosome.genes[0...crossoverPoint]
     

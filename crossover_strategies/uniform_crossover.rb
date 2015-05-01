@@ -17,7 +17,7 @@ class UniformCrossover
     secondChild.genes = []
     
     (0...first_chromosome.genes.count).each do |i|
-      p = provider.nextDouble
+      p = provider.next_double
       if(p < @probability)
         firstChild.genes.push first_chromosome.genes[i]
         secondChild.genes.push second_chromosome.genes[i]
