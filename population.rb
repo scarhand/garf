@@ -22,6 +22,15 @@ class Population
     
   def evolve
     provider = RandomProvider.instance
+    mutate = Proc.new do |*chromosomes| 
+      chromosomes.each do |c|
+        c.genes.each do |g|
+          Mutate.mutate(g) if provider.next_double <= @mutation_chance
+        end
+      end
+    end
+  
+    #provider = RandomProvider.instance
     population = Population.new
     population.current_generation = current_generation+1
     population.strategies = strategies
@@ -30,12 +39,12 @@ class Population
       if p < @crossover_chance
         strategy = strategies[provider.next_int(0,strategies.count-1)]
         crossed = strategy.crossover c1, c2
-        mutate *crossed
+        mutate.call *crossed
         population.current_population.push *crossed # splat the array to single values
       else
         c1 = c1.clone
         c2 = c2.clone
-        mutate c1, c2
+        mutate.call c1, c2
         population.current_population.push c1,c2
       end
       c2
@@ -50,13 +59,13 @@ class Population
     "POPULATION (SIZE #{populationSize}) (GENERATION #{current_generation}) \n#{current_population.join("\n")}"
   end
   
-  private
-  def mutate(*chromosomes)
-    provider = RandomProvider.instance
-    chromosomes.each do |c|
-      c.genes.each do |g|
-        Mutate.mutate(g) if provider.next_double <= @mutation_chance
-      end
-    end
-  end
+  #private
+  #def mutate(*chromosomes)
+  #  provider = RandomProvider.instance
+  #  chromosomes.each do |c|
+  #    c.genes.each do |g|
+  #      Mutate.mutate(g) if provider.next_double <= @mutation_chance
+  #    end
+  #  end
+  #end
 end
