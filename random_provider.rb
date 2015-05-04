@@ -15,6 +15,8 @@ class RandomProvider
     if(min.nil? && max.nil?)
       min = 0
       max = 2_147_483_647 #from c_sharp Integer.MaxValue
+    elsif(min.respond_to?(:min) && min.respond_to?(:max) && max.nil?)
+      min, max = min.min, min.max  
     elsif(!min.nil? && max.nil?)
       max = min
       min = 0
